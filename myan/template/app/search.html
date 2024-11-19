@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="search-container">
+    <form method="GET" action="/search/" class="search-form">
+        <div class="search-input-group">
+            <i class="fas fa-search"></i>
+            <input type="text" name="query" placeholder="Search for songs, artists, or albums..." 
+                   value="{{ request.GET.query }}">
+        </div>
+    </form>
+
+    {% if results %}
+        <div class="search-results">
+            <h2>Search Results</h2>
+            <div class="results-grid">
+                {% for result in results %}
+                    <div class="result-card">
+                        <img src="{{ result.image_url|default:'/static/images/default.png' }}" 
+                             alt="{{ result.name }}">
+                        <div class="result-info">
+                            <h3>{{ result.name }}</h3>
+                            <p>{{ result.artist }}</p>
+                            <div class="result-controls">
+                                <button class="play-btn"><i class="fas fa-play"></i></button>
+                                <button class="add-btn"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
