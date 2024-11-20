@@ -26,16 +26,16 @@ def register_view(request):
         confirm_password = request.POST['confirm_password']
         
         if password != confirm_password:
-            return render(request, 'register.html', {'error': 'Passwords do not match'})
+            return render(request, 'myan/register.html', {'error': 'Passwords do not match'})
             
         try:
             user = User.objects.create_user(username=username, email=email, password=password)
             login(request, user)
             return redirect('home')
         except:
-            return render(request, 'register.html', {'error': 'Username already exists'})
+            return render(request, 'myan/register.html', {'error': 'Username already exists'})
             
-    return render(request, 'register.html')
+    return render(request, 'myan/register.html')
 
 def login_view(request):
     if request.method == 'POST':
@@ -47,9 +47,9 @@ def login_view(request):
             login(request, user)
             return redirect('home')
         else:
-            return render(request, 'login.html', {'error': 'Invalid credentials'})
+            return render(request, 'myan/login.html', {'error': 'Invalid credentials'})
             
-    return render(request, 'login.html')
+    return render(request, 'myan/login.html')
 
 @login_required
 def logout_view(request):
@@ -66,4 +66,4 @@ def search(request):
         )
     else:
         results = []
-    return render(request, 'search.html', {'results': results})
+    return render(request, 'myan/search.html', {'results': results})
