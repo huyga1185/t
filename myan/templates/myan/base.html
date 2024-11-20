@@ -25,11 +25,39 @@
     </header>
 
     <main>
+        <!-- Slideshow Section -->
+        <div class="slideshow-container">
+            <div class="slide fade">
+                <img src="{% static '38b6fce4439ea7befea69f08cab27d7d.jpg' %}" alt="Image 1">
+            </div>
+            <div class="slide fade">
+                <img src="{% static 'dc79d7c463ba14c02c72f27bed498cf1.jpg' %}" alt="Image 2">
+            </div>
+            <div class="slide fade">
+                <img src="{% static '9c2ae55e32530892ca3e31dd4fc9ab40.jpg' %}" alt="Image 3">
+            </div>
+        </div>
         {% block content %}{% endblock %}
     </main>
 
     <footer>
         <p>&copy; 2024 Music Site | HT with Love <i class="fas fa-heart"></i></p>
     </footer>
+
+    <script>
+        let currentSlide = 0;
+
+        function showSlides() {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach(slide => slide.style.display = 'none'); // Ẩn tất cả ảnh
+            currentSlide = (currentSlide + 1) % slides.length; // Chuyển sang ảnh tiếp theo
+            slides[currentSlide].style.display = 'block'; // Hiển thị ảnh hiện tại
+        }
+
+        // Hiển thị ảnh đầu tiên
+        showSlides();
+        // Tự động chuyển ảnh sau 5 giây
+        setInterval(showSlides, 5000);
+    </script>
 </body>
 </html>
