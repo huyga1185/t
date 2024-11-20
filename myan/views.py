@@ -13,7 +13,7 @@ def home(request):
     # Đổi truy vấn order_by theo trường hợp lệ, ví dụ: 'id'
     songs = Song.objects.all().order_by('-id')[:10]
     
-    return render(request, 'app/homepage.html', {
+    return render(request, 'myan/home.html', {
         'playlists': playlists,
         'songs': songs
     })

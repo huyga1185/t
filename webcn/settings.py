@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'myan',
+    'webcn',
 ]
 
 MIDDLEWARE = [
@@ -56,11 +57,8 @@ ROOT_URLCONF = 'webcn.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            # Add the templates directory
-            BASE_DIR / 'templates',  # If you have a global templates folder
-        ],
-        'APP_DIRS': True,  # This allows Django to search for templates in each app's 'templates' directory
+        'DIRS': [],  # Để trống nếu template nằm trong app
+        'APP_DIRS': True,  # Quan trọng! Bật tính năng tìm template trong app
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -79,7 +77,7 @@ TEMPLATES = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',  # Sử dụng MySQL backend
-        'NAME': 'zc',  # Tên cơ sở dữ liệu của bạn
+        'NAME': 'bt',  # Tên cơ sở dữ liệu của bạn
         'USER': 'root',  # Tên người dùng MySQL (mặc định là 'root' nếu bạn chưa thay đổi)
         'PASSWORD': '',  # Mật khẩu MySQL (mặc định là trống nếu bạn chưa thiết lập mật khẩu cho root
         'PORT': '3306',  # Cổng mặc định của MySQL
@@ -136,5 +134,3 @@ STATICFILES_DIRS = [
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-
