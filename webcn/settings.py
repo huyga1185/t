@@ -77,7 +77,7 @@ TEMPLATES = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',  # Sử dụng MySQL backend
-        'NAME': 'bt',  # Tên cơ sở dữ liệu của bạn
+        'NAME': 'cnty',  # Tên cơ sở dữ liệu của bạn
         'USER': 'root',  # Tên người dùng MySQL (mặc định là 'root' nếu bạn chưa thay đổi)
         'PASSWORD': '',  # Mật khẩu MySQL (mặc định là trống nếu bạn chưa thiết lập mật khẩu cho root
         'PORT': '3306',  # Cổng mặc định của MySQL
@@ -125,7 +125,7 @@ STATIC_URL = '/static/'
 
 # Nếu bạn có thư mục static riêng, thêm nó vào STATICFILES_DIRS
 STATICFILES_DIRS = [
-    BASE_DIR / 'static',
+    BASE_DIR / "static",  # This will point to 'your_project/static'
 ]
 
 

@@ -1,5 +1,4 @@
-# models.py
-from django.db import models
+# models.p
 
 from django.db import models
 from django.utils import timezone
@@ -17,7 +16,7 @@ class Playlist(models.Model):
 class Song(models.Model):
     name = models.CharField(max_length=255)
     artist = models.CharField(max_length=255)
-    audio_file = models.FileField(upload_to='songs/')
+    audio_file = models.FileField(upload_to='songs/', default='songs/default.mp3')
     playlist = models.ForeignKey('Playlist', on_delete=models.CASCADE)
     plays = models.IntegerField(default=0)  # Thêm trường plays
 
