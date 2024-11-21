@@ -26,38 +26,55 @@
 
 <section class="popular-artist">
     <h2>Artist</h2>
-    <ul class="artist-list">
+    <div class="artist-list">
         {% for artist in artists %}
-            <li class="artist-item">
-                <div class="artist-info">
-                    <!-- Display artist details here if needed -->
-                    <h3>{{ artist.name }}</h3>
-                </div>
-            </li>
+            <div class="artist-item">
+                <img src="{{ artist.avatar.url|default:'/static/images/default-avatar.png' }}" alt="{{ artist.name }}" class="artist-avatar">
+                <h3>{{ artist.name }}</h3>
+            </div>
         {% empty %}
-            <li>No artists available</li>
+            <p>No artists available</p>
         {% endfor %}
-    </ul>
+    </div>
 </section>
 
 <section class="popular-songs">
     <h2><i class="fas fa-music"></i> Songs</h2>
     <ul class="song-list">
         {% for song in songs %}
-            <li class="song-item">
-                <img src="{{ song.album.cover_image.url|default:'/static/images/default-song.png' }}" alt="{{ song.name }}" width="50">
-                <div class="song-info">
-                    <h3>{{ song.name }}</h3>
-                    <p>{{ song.artist }}</p>
+            <li class="song-item row">
+                <div class="song-controls col">
+                    <button class="play-btn" data-audio="{{ song.audio_file.url }}" data-title="{{ song.name }}" data-artist="{{ song.artist }}">
+                        <i class="fas fa-play"></i>
+                    </button>
                 </div>
-                <div class="song-controls">
-                    <button class="play-btn"><i class="fas fa-play"></i></button>
-                    <button class="add-to-playlist-btn"><i class="fas fa-plus"></i></button>
-                </div>
+                <h3 class="song-name col-8">{{ song.name }}</h3>
+                <p class="song-genre col-3">{{ song.genre }}</p>
+                <p class="song-artist col-3">{{ song.artist }}</p>
+
             </li>
         {% empty %}
             <li>No songs available.</li>
         {% endfor %}
     </ul>
 </section>
+
+<!-- Sticky music control bar -->
+<div id="music-bar" class="music-bar hidden">
+    <div class="music-bar-info">
+        <p id="current-song-title">Title</p>
+        <p id="current-song-artist">Artist</p>
+    </div>
+    <!-- Custom controls for music -->
+    <div class="music-player-controls">
+        <button id="prev-btn" class="music-control-btn"><i class="fas fa-backward"></i></button>
+        <button id="play-pause-btn" class="music-control-btn"><i class="fas fa-play"></i></button>
+        <button id="next-btn" class="music-control-btn"><i class="fas fa-forward"></i></button>
+        <input type="range" id="seek-bar" value="0" max="100" class="seek-bar">
+        <input type="range" id="volume-bar" value="100" max="100" class="volume-bar">
+    </div>
+</div>
+
+
+
 {% endblock %}

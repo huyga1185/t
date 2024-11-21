@@ -122,6 +122,9 @@ USE_TZ = True
 
 # settings.py
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 STATIC_URL = '/static/'
 
 # Nếu bạn có thư mục static riêng, thêm nó vào STATICFILES_DIRS
@@ -135,7 +138,3 @@ STATICFILES_DIRS = [
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
-DROPBOX_OAUTH2_TOKEN = 'sl.CBGuxKu9W7riM7eXolvElUuaUBjn0P4bGMkYvZQhSrHJSdTj7WrKB-u3c3inLgqmTu0BlI0EAPO8FTh6RTSWqIH9GoWt95TWGLubVcRTabydikTCKQ3KIJ4QYYSk4DAM0SYq6vab8VNQ'
-DROPBOX_ROOT_PATH = '/spotify_clone_1990/'
