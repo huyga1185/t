@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myan',
     'webcn',
+    'storages'
 ]
 
 MIDDLEWARE = [
@@ -80,7 +81,7 @@ DATABASES = {
         'NAME': 'cnty',  # Tên cơ sở dữ liệu của bạn
         'USER': 'root',  # Tên người dùng MySQL (mặc định là 'root' nếu bạn chưa thay đổi)
         'PASSWORD': '',  # Mật khẩu MySQL (mặc định là trống nếu bạn chưa thiết lập mật khẩu cho root
-        'PORT': '3306',  # Cổng mặc định của MySQL
+        'PORT': '3307',  # Cổng mặc định của MySQL
     }
 }
 
@@ -134,3 +135,7 @@ STATICFILES_DIRS = [
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
+DROPBOX_OAUTH2_TOKEN = 'sl.CBGuxKu9W7riM7eXolvElUuaUBjn0P4bGMkYvZQhSrHJSdTj7WrKB-u3c3inLgqmTu0BlI0EAPO8FTh6RTSWqIH9GoWt95TWGLubVcRTabydikTCKQ3KIJ4QYYSk4DAM0SYq6vab8VNQ'
+DROPBOX_ROOT_PATH = '/spotify_clone_1990/'

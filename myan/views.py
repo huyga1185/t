@@ -2,20 +2,26 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .models import Playlist, Song
+from .models import *
 from django.db.models import Q
 
 def home(request):
     # Lấy danh sách playlist (giới hạn 6 mục)
-    playlists = Playlist.objects.all()[:6]
+    playlists = []
+    if request.user.is_authenticated:
+        playlists = Playlist.objects.all()[:6]
     
     # Kiểm tra nếu trường 'plays' không tồn tại trong model Song
     # Đổi truy vấn order_by theo trường hợp lệ, ví dụ: 'id'
-    songs = Song.objects.all().order_by('-id')[:10]
-    
+    songs = Song.objects.all().order_by('-release_date')[:10]
+    artists = Artist.objects.all()[:10]
+    genres = Genre.objects.all()[:10]
+
     return render(request, 'myan/home.html', {
         'playlists': playlists,
-        'songs': songs
+        'songs': songs,
+        'artists': artists,
+        'genres': genres
     })
 
 def register_view(request):
@@ -51,11 +57,6 @@ def login_view(request):
             
     return render(request, 'myan/login.html')
 
-@login_required
-def logout_view(request):
-    logout(request)
-    return redirect('home')
-
 def search(request):
     query = request.GET.get('query', '')
     if query:
@@ -67,3 +68,10 @@ def search(request):
     else:
         results = []
     return render(request, 'myan/search.html', {'results': results})
+
+@login_required
+def logout_view(request):
+    logout(request)
+    return redirect('home')
+
+

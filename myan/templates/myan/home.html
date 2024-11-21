@@ -4,26 +4,46 @@
 
 {% block content %}
 <section class="featured">
-    <h2><i class="fas fa-fire"></i>  Playlists</h2>
+    <h2><i class="fas fa-fire"></i> Playlists</h2>
     <div class="playlist-grid">
-        {% if playlists %}
-            {% for playlist in playlists %}
-                <div class="playlist-card">
-                    <img src="{{ playlist.cover_image.url|default:'/static/images/default-playlist.png' }}" alt="{{ playlist.name }}">
-                    <h3>{{ playlist.name }}</h3>
-                    <p>{{ playlist.songs.count }} songs</p>
-                </div>
-            {% endfor %}
+        {% if user.is_authenticated %}
+            {% if playlists %}
+                {% for playlist in playlists %}
+                    <div class="playlist-card">
+                        <img src="{{ playlist.cover_image.url|default:'/static/images/default-playlist.png' }}" alt="{{ playlist.name }}">
+                        <h3>{{ playlist.name }}</h3>
+                        <p>{{ playlist.songs.count }} songs</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No playlists available.</p>
+            {% endif %}
         {% else %}
-            <p>No playlists available.</p>
+            <p>Sign in to view your playlists</p>
         {% endif %}
     </div>
 </section>
 
+<section class="popular-artist">
+    <h2>Artist</h2>
+    <ul class="artist-list">
+        {% for artist in artists %}
+            <li class="artist-item">
+                <div class="artist-info">
+                    <!-- Display artist details here if needed -->
+                    <h3>{{ artist.name }}</h3>
+                </div>
+            </li>
+        {% empty %}
+            <li>No artists available</li>
+        {% endfor %}
+    </ul>
+</section>
+
 <section class="popular-songs">
-    <h2><i class="fas fa-music"></i>  Songs</h2>
+    <h2><i class="fas fa-music"></i> Songs</h2>
     <ul class="song-list">
-        {% for song in Songs %}
+        {% for song in songs %}
             <li class="song-item">
                 <img src="{{ song.album.cover_image.url|default:'/static/images/default-song.png' }}" alt="{{ song.name }}" width="50">
                 <div class="song-info">
